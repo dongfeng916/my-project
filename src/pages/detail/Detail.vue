@@ -83,7 +83,7 @@ export default {
                 output: "json"
               },
               success: res => {
-                if (res.data.state === 0) {
+                if (res.data.status === 0) {
                   this.location = res.data.result.address_component.city;
                 } else {
                   this.location = "未知地点";
@@ -99,7 +99,7 @@ export default {
     getPhone(e) {
       if (e.target.value) {
         const phoneInfo = wx.getSystemInfoSync();
-        this.phone = phonInfo.model;
+        this.phone = phoneInfo.model;
       } else {
         //没有选中
         this.phone = "";
