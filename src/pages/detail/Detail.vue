@@ -21,7 +21,7 @@
       </div>
       <button class="btn" @click='addComment'>评论</button>
     </div>
-    <div v-else>
+    <div v-else class="text-footer">
         未登录或者已经评论过了
     </div>
     <button open-type="share" class="btn">转发给好友</button>
