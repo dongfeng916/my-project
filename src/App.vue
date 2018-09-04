@@ -11,7 +11,6 @@ export default {
     //     console.log(res)
     //   }
     // })
-    console.log('小程序启动了')
   }
 }
 </script>
