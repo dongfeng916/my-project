@@ -2,14 +2,20 @@
 const { mysql } = require('../qcloud')
 
 module.exports = async (ctx) => {
-    const {page} = ctx.request.query
+    const {page,openid} = ctx.request.query
     const size = 10
-    const books = await mysql('books')
+    const mysqlSelect = mysql('books')
                      .select('books.*','cSessionInfo.user_info')
                      .join('cSessionInfo','books.openid','cSessionInfo.open_id')
-                     .limit(size)                //长度
-                     .offset(Number(page)*size)  //起点
                      .orderBy('books.id','desc')
+    let books
+    if(openid){
+        //根据openid过滤
+        books = await mysqlSelect.where('books.openid',openid)
+    }else{
+        //全部图书  分页
+        books=await mysqlSelect.limit(size).offset(Number(page)*size)  //起点
+    }
     //  .orderBy('id','desc')
     ctx.state.data = {
         list: books.map(v=>{
